@@ -25,11 +25,10 @@ end
 
 
 function Player:makeTurn(field)
-	if isMousePressed == true then --calculate cell position
+	if isMousePressed == true then
 		local cellY = math.floor((mouseY - (VIRTUAL_HEIGHT/2 - field:getCellSize()*(field:getSize()/2)))/field:getCellSize()) + 1  
 		local cellX = math.floor((mouseX - (VIRTUAL_WIDTH/2 - field:getCellSize()*(field:getSize()/2)))/field:getCellSize()) + 1
 		
-		--if cell exist
 		if cellX > 0 and cellX <= field:getSize() and cellY > 0 and cellY <= field:getSize() then
 			if field:isCellEmpty(cellX, cellY) == true then
 					field:inputSymbol(cellX,cellY, self.symbol)
@@ -45,7 +44,6 @@ end
 function love.mousepressed(x, y, button, istouch)
     if button == 1 then
 		isMousePressed = true
-		-- convert global coordinates to local
 		mouseX , mouseY = push:toGame(x, y)
 	end
 end

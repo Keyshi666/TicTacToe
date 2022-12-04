@@ -11,7 +11,6 @@ function Field:init(size)
 		end
     end
 	
-	--set pixel size of cells
 	if self.size == 3 then
 		self.cellSize = 60
 	elseif self.size == 4 then

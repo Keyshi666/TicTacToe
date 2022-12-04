@@ -49,36 +49,29 @@ function Computer:minimax(board, depth, isMax)
 		return 0
 	end
 	
-	--If this maximizer's move
 	if isMax then
 		local best = -1000
-		-- Traverse all cells
 		for i = 1, currentBoard:getSize(), 1 do
 			for j = 1, currentBoard:getSize(), 1 do
 				if currentBoard:isCellEmpty(j,i) then
 					currentBoard:inputSymbol(j,i,self.symbol)
-					-- Call minimax recursively and choose the maximum value
 					best = math.max( best, self:minimax(currentBoard, depth+1, not isMax) )
-					--undo the move
 					currentBoard:inputSymbol(j,i,"")
 				end
 			end
 		end
 		return best
-	else --If this minimizer's move
+	else
 		local best = 1000
 		for i = 1, currentBoard:getSize(), 1 do
 			for j = 1, currentBoard:getSize(), 1 do
 				if currentBoard:isCellEmpty(j,i) then
-					-- Make the move for opponent
 					if self.symbol== "X" then
 						currentBoard:inputSymbol(j,i,"0")
 					else
 						currentBoard:inputSymbol(j,i,"X")
 					end
-					-- Call minimax recursively and choose the minimum value
 					best = math.min(best, self:minimax(currentBoard, depth+1, not isMax))
-					-- Undo the move
 					currentBoard:inputSymbol(j,i,"")
 				end
 			end
@@ -93,15 +86,12 @@ function Computer:findBestMove(board)
 	local bestMove = {}
 	bestMove.row = -1
 	bestMove.col = -1
-    -- calculate value for every cell
 	for i = 1, currentBoard:getSize(), 1 do
 		for j = 1, currentBoard:getSize(), 1 do
 			if currentBoard:isCellEmpty(j,i) then
-				-- Make the move
 				currentBoard:inputSymbol(j,i,self.symbol)
 
 				local moveVal = self:minimax(currentBoard, 0, false)
-				-- Undo the move
 				currentBoard:inputSymbol(j,i,"")
 
 				if moveVal > bestVal then

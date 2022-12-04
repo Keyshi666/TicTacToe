@@ -8,7 +8,6 @@ function PlayState:enter(params)
     self.field = params.field
 	isMousePressed = false
 	
-	--randomize turns
 	self.firstTurn = math.random(1,2)
 	if self.firstTurn == 1 then
 		self.opponent1:setSymbol("X")
@@ -36,8 +35,6 @@ function PlayState:update(dt)
 		love.timer.sleep(0.2)	
 	end
 	
-	
-	-- change state if anyone win or matrix is full
 	local winnerSymbol = self.field:checkVictory()
 	if winnerSymbol ~= "None" then
 		if winnerSymbol == self.opponent1:getSymbol() then
@@ -56,7 +53,6 @@ end
 function PlayState:render()
     self.field:render()
 	
-	--draw names
 	love.graphics.printf(self.opponent1:getName(), 10, 10, 100, 'left')
 	love.graphics.printf(self.opponent2:getName(), VIRTUAL_WIDTH-110, 10, 100, 'right')
 end

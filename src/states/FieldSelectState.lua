@@ -18,7 +18,6 @@ function FieldSelectState:update(dt)
 		highlighted = (highlighted + 1) % 3
     end
 
-    -- select paddle and move on to the serve state, passing in the selection
     if love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
 
 		if highlighted == 0 then
@@ -42,21 +41,18 @@ function FieldSelectState:update(dt)
 end
 
 function FieldSelectState:render()
-    -- instructions
     love.graphics.setColor(156/255, 0, 84, 1)
     love.graphics.printf("Select field to play!", 0, VIRTUAL_HEIGHT / 4,
         VIRTUAL_WIDTH, 'center')
     love.graphics.printf("(Press Enter to continue!)", 0, VIRTUAL_HEIGHT / 3,
         VIRTUAL_WIDTH, 'center')
         
-		
     if highlighted == 0 then
         love.graphics.setColor(love.math.colorFromBytes(250, 110, 133))
     end
     love.graphics.printf("3x3", 0, VIRTUAL_HEIGHT / 2 - 15,
         VIRTUAL_WIDTH, 'center')
 
-    -- reset the color
     love.graphics.setColor(156/255, 0, 84, 1)
 
     if highlighted == 1 then
@@ -66,7 +62,6 @@ function FieldSelectState:render()
         VIRTUAL_WIDTH, 'center')
     love.graphics.setColor(156/255, 0, 84, 1)
 
-    -- render blue if we're highlighting that one
     if highlighted == 2 then
         love.graphics.setColor(love.math.colorFromBytes(250, 110, 133))
     end
